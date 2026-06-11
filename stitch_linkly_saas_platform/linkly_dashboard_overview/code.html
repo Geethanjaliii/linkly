@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Linkly Dashboard | Secure SaaS</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#005b7c",
+                    "surface-variant": "#d3e4fe",
+                    "on-background": "#0b1c30",
+                    "tertiary-container": "#00759f",
+                    "on-tertiary-container": "#e1f2ff",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#dae2fd",
+                    "surface": "#f8f9ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-low": "#eff4ff",
+                    "background": "#f8f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-surface": "#0b1c30",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#565e74",
+                    "surface-container-high": "#dce9ff",
+                    "outline": "#737686",
+                    "on-surface-variant": "#434655",
+                    "surface-container-highest": "#d3e4fe",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary-fixed-dim": "#7bd0ff",
+                    "on-tertiary-fixed": "#001e2c",
+                    "on-tertiary-fixed-variant": "#004c69",
+                    "primary-container": "#2563eb",
+                    "tertiary-fixed": "#c4e7ff",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary-container": "#5c647a",
+                    "surface-container": "#e5eeff",
+                    "inverse-surface": "#213145",
+                    "surface-dim": "#cbdbf5",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "margin-desktop": "40px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-lg-mobile": ["Geist"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "display": ["Geist"],
+                    "label-code": ["JetBrains Mono"],
+                    "headline-lg": ["Geist"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "label-code": ["13px", {"lineHeight": "16px", "letterSpacing": "0", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar Shell (Fixed Top) -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm flex justify-between items-center px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-display text-headline-md" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h1 class="font-display text-headline-md font-bold text-primary">Linkly</h1>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-body-md hover:bg-primary-container transition-all active:scale-95 duration-200">
+            Get Started
+        </button>
+</header>
+<!-- Sidebar Navigation (Desktop Only) -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-full w-[280px] bg-surface border-r border-outline-variant flex-col gap-stack-sm p-stack-md pt-20">
+<div class="flex items-center gap-3 px-3 py-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up professional headshot of Alex Chen, a tech executive with a friendly expression. The background is a soft-focus modern office setting with cool blue tones and natural lighting, maintaining a premium and trustworthy corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVtuQ4HfSctLBgmu8HzQ6SGcQ34R1IKIozJCjy9wB9oWvVSLDcyFKr_18qmdxaHVeoY7llm-e24bzMAZ--ifoVxD6G26XNZu_qAso-K5bueqbap1c4Ym4CVn_2uSJOIrjRhskk8p2JAG_qvUAz6deIsWb3J5n6Hh2l_IIida9RYo-tCCsA7Qa0UDWtS9lAUZ6Y5sq5ORS4AyGMrxsowUr_N6skoBjT00mNHWEweyvpChLvYvUsASxdz9eoCu9pAT7Zn-IgqAJTotAj"/>
+</div>
+<div>
+<p class="font-body-md font-semibold text-primary">Alex Chen</p>
+<p class="font-body-sm text-secondary">Enterprise Plan</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-secondary-container text-on-secondary-container font-semibold rounded-lg px-4 py-3 flex items-center gap-3 active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="text-secondary hover:bg-surface-container transition-colors rounded-lg px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<a class="text-secondary hover:bg-surface-container transition-colors rounded-lg px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-body-md">Malware Scan</span>
+</a>
+<a class="text-secondary hover:bg-surface-container transition-colors rounded-lg px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">language</span>
+<span class="font-body-md">Domains</span>
+</a>
+<a class="text-secondary hover:bg-surface-container transition-colors rounded-lg px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Team</span>
+</a>
+<a class="text-secondary hover:bg-surface-container transition-colors rounded-lg px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-margin-mobile md:px-margin-desktop lg:ml-[280px] max-w-container-max mx-auto">
+<!-- Header & Greetings -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-on-background mb-1">Infrastructure Overview</h2>
+<p class="font-body-sm text-secondary">Welcome back, Alex. Monitoring your links across 4 domains.</p>
+</div>
+<!-- Stats Grid -->
+<section class="stats-grid mb-stack-lg">
+<!-- Total Links -->
+<div class="bg-surface-container-lowest border border-outline-variant p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="text-secondary font-label-caps uppercase">Total Links</span>
+<span class="material-symbols-outlined text-primary-container">link</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg">1,284</span>
+<span class="text-primary text-[12px] font-semibold flex items-center">+12% <span class="material-symbols-outlined text-[14px]">trending_up</span></span>
+</div>
+</div>
+<!-- Total Clicks -->
+<div class="bg-surface-container-lowest border border-outline-variant p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="text-secondary font-label-caps uppercase">Total Clicks</span>
+<span class="material-symbols-outlined text-primary-container">ads_click</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg">48.2k</span>
+<span class="text-primary text-[12px] font-semibold flex items-center">+8.4% <span class="material-symbols-outlined text-[14px]">trending_up</span></span>
+</div>
+</div>
+<!-- Active Links -->
+<div class="bg-surface-container-lowest border border-outline-variant p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="text-secondary font-label-caps uppercase">Active Links</span>
+<span class="material-symbols-outlined text-primary-container">bolt</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg">942</span>
+<span class="text-on-surface-variant text-[12px] font-semibold flex items-center">Stable <span class="material-symbols-outlined text-[14px]">horizontal_rule</span></span>
+</div>
+</div>
+<!-- Security Score -->
+<div class="bg-surface-container-lowest border border-outline-variant p-5 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-3">
+<span class="text-secondary font-label-caps uppercase">Security Score</span>
+<span class="material-symbols-outlined text-primary-container">verified_user</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg">98%</span>
+<span class="text-primary text-[12px] font-semibold flex items-center">Perfect <span class="material-symbols-outlined text-[14px]">check_circle</span></span>
+</div>
+</div>
+</section>
+<!-- Create Short URL Widget -->
+<section class="mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="bg-surface-container-low px-6 py-4 border-b border-outline-variant">
+<h3 class="font-body-md font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_link</span>
+                        Create Short URL
+                    </h3>
+</div>
+<div class="p-6">
+<form class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label-caps text-secondary">Target Destination (Long URL)</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-body-md focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="https://very-long-and-complex-enterprise-url.com/campaign-id-2024" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-caps text-secondary">Custom Slug (Optional)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-secondary font-label-code">linkly.io/</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 pl-20 text-body-md font-label-code focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="summer-promo" type="text"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-4 items-center justify-between pt-2">
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-sm text-on-surface-variant">Deep Link Detection</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-sm text-on-surface-variant">Malware Protection</span>
+</label>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary font-body-md px-8 py-3 rounded-lg hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">auto_fix_high</span>
+                                Generate Secure Link
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Recent Links Table -->
+<section class="mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-4 flex items-center justify-between border-b border-outline-variant">
+<h3 class="font-body-md font-semibold text-on-surface">Recent Links</h3>
+<button class="text-primary font-body-sm hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-label-caps text-secondary">Original URL</th>
+<th class="px-6 py-4 font-label-caps text-secondary">Short URL</th>
+<th class="px-6 py-4 font-label-caps text-secondary">Clicks</th>
+<th class="px-6 py-4 font-label-caps text-secondary">Status</th>
+<th class="px-6 py-4 font-label-caps text-secondary text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<!-- Link Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-tertiary">globe</span>
+</div>
+<span class="font-body-sm text-on-surface-variant truncate max-w-[200px]">docs.google.com/presentation/d/1v8...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-label-code text-primary">linkly.io/Qx7R9</span>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md font-semibold">1,204</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[12px] font-semibold uppercase">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">content_copy</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">analytics</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-error">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Link Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-tertiary">shopping_cart</span>
+</div>
+<span class="font-body-sm text-on-surface-variant truncate max-w-[200px]">shopify.com/products/summer-vibe...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-label-code text-primary">linkly.io/summer-vibe</span>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md font-semibold">4,892</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed text-[12px] font-semibold uppercase">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">content_copy</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">analytics</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-error">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Link Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-error">dangerous</span>
+</div>
+<span class="font-body-sm text-on-surface-variant truncate max-w-[200px]">suspicious-site.com/malware-test</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-label-code text-primary">linkly.io/test-safe</span>
+</td>
+<td class="px-6 py-4">
+<span class="font-body-md font-semibold">0</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-error-container text-on-error-container text-[12px] font-semibold uppercase">Blocked</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">content_copy</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-secondary">analytics</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-error">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Footer Shell -->
+<footer class="flex flex-col md:flex-row justify-between items-center py-stack-lg px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant bg-surface-container-lowest">
+<p class="font-body-sm text-on-surface-variant mb-4 md:mb-0">© 2024 Linkly Secure SaaS. All rights reserved.</p>
+<div class="flex gap-gutter">
+<a class="text-on-surface-variant hover:text-primary font-body-sm transition-opacity duration-200" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary font-body-sm transition-opacity duration-200" href="#">Terms</a>
+<a class="text-on-surface-variant hover:text-primary font-body-sm transition-opacity duration-200" href="#">Security Status</a>
+<a class="text-on-surface-variant hover:text-primary font-body-sm transition-opacity duration-200" href="#">API Docs</a>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar Shell (Mobile Only) -->
+<nav class="fixed bottom-0 w-full rounded-t-xl bg-surface/80 backdrop-blur-lg border-t border-outline-variant/50 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center h-16 px-margin-mobile z-50 lg:hidden">
+<a class="flex flex-col items-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps uppercase text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant hover:bg-surface-variant/20 px-4 py-1 rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="font-label-caps uppercase text-[10px] mt-1">Links</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant hover:bg-surface-variant/20 px-4 py-1 rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-caps uppercase text-[10px] mt-1">Security</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant hover:bg-surface-variant/20 px-4 py-1 rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps uppercase text-[10px] mt-1">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-20 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center lg:hidden hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        // Micro-interaction for inputs
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple dashboard notification mock
+        setTimeout(() => {
+            console.log("Linkly: Real-time scan complete. 0 threats detected.");
+        }, 2000);
+    </script>
+</body></html>
