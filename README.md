@@ -152,19 +152,6 @@ NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
     ```
 2.  Deploy production builds on Vercel, Netlify, or AWS Amplify.
 
----
-
-## 📸 Screenshots
-
-Artifact screenshots showing dashboard workflows are stored locally under the brain artifacts directory:
-*   [Console Dashboard Overview](screenshot_desktop_dashboard.png)
-*   [Mobile Layout View](screenshot_mobile_dashboard.png)
-*   [Curved Analytics View](screenshot_analytics.png)
-*   [Edit Slug Modal](screenshot_edit_modal.png)
-*   [Preferences settings with Dark Mode Switch](screenshot_settings.png)
-
----
-
 ## ✍️ Author
 
 Created by **Geethanjali** (Geethanjaliii/linkly).
