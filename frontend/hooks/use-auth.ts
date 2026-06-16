@@ -91,7 +91,6 @@ export function useAuth() {
         { name, email, password },
         false
       );
-      // Automatically log in after sign up
       await login(email, password);
       return true;
     } catch (err: any) {
