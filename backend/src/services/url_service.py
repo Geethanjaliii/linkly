@@ -10,7 +10,7 @@ def generate_unique_short_code(db: Session) -> str:
         length = secrets.choice([6, 7, 8])
         code = "".join(secrets.choice(alphabet) for _ in range(length))
         
-        #Check uniqueness in th database
+        #Check uniqueness in  database
         exists = db.query(models.URL).filter(models.URL.short_code == code).first()
         if not exists:
             return code
