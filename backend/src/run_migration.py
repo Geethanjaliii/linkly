@@ -6,7 +6,23 @@ def run_migration():
     commands = [
         "ALTER TABLE users ADD COLUMN IF NOT EXISTS google_id VARCHAR(255) UNIQUE;",
         "ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_picture TEXT;",
-        "ALTER TABLE users ALTER COLUMN hashed_password DROP NOT NULL;"
+        "ALTER TABLE users ALTER COLUMN hashed_password DROP NOT NULL;",
+        """CREATE TABLE IF NOT EXISTS click_events (
+            id SERIAL PRIMARY KEY,
+            url_id INTEGER NOT NULL REFERENCES urls(id) ON DELETE CASCADE,
+            clicked_at TIMESTAMP,
+            browser VARCHAR,
+            browser_version VARCHAR,
+            os VARCHAR,
+            os_version VARCHAR,
+            device_type VARCHAR,
+            referrer VARCHAR,
+            country VARCHAR,
+            city VARCHAR,
+            ip_hash VARCHAR
+        );""",
+        "CREATE INDEX IF NOT EXISTS ix_click_events_url_id ON click_events (url_id);",
+        "CREATE INDEX IF NOT EXISTS ix_click_events_clicked_at ON click_events (clicked_at);"
     ]
     with engine.connect() as conn:
         for cmd in commands:

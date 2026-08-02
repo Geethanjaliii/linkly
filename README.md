@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Linkly Secure Shortener & Analytics SaaS Platform
 
 Linkly is a modern, responsive, and secure URL shortening and analytics platform. Built with a robust Next.js frontend and a secure FastAPI backend, it protects target redirection routes with an hourly commercial-grade malware scanner, prevents phishing triggers, and tracks clicks, devices, and country demographics in real-time.
@@ -156,3 +157,6 @@ NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
 
 Created by **Geethanjali** (Geethanjaliii/linkly).
 License: [MIT](LICENSE)
+=======
+# codeAlpha_DockerWebServer
+>>>>>>> 919eece9fb96ab331225902211ad68987d8858bf
