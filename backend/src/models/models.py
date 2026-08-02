@@ -29,4 +29,25 @@ class URL(Base):
 
     # Relationships
     owner = relationship("User", back_populates="urls")
+    click_events = relationship("ClickEvent", back_populates="url", cascade="all, delete-orphan")
 
+class ClickEvent(Base):
+    __tablename__ = "click_events"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    url_id = Column(Integer, ForeignKey("urls.id", ondelete="CASCADE"), nullable=False, index=True)
+    clicked_at = Column(DateTime, default=datetime.datetime.utcnow, index=True)
+
+    browser = Column(String, nullable=True)
+    browser_version = Column(String, nullable=True)
+    os = Column(String, nullable=True)
+    os_version = Column(String, nullable=True)
+    device_type = Column(String, nullable=True)
+
+    referrer = Column(String, nullable=True)
+    country = Column(String, nullable=True)
+    city = Column(String, nullable=True)
+    ip_hash = Column(String, nullable=True)
+
+    # Relationships
+    url = relationship("URL", back_populates="click_events")
