@@ -84,8 +84,8 @@ ua-parser-builtins==202606
 urllib3==2.6.3
 user-agents==2.2.0
 uvicorn==0.46.0
-validators==0.35.0
 watchdog==6.0.0
+validators==0.35.0
 watchfiles==1.2.0
 websocket-client==1.9.0
 websockets==16.0
