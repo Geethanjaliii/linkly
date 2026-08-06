@@ -157,6 +157,3 @@ NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
 
 Created by **Geethanjali** (Geethanjaliii/linkly).
 License: [MIT](LICENSE)
-=======
-# codeAlpha_DockerWebServer
->>>>>>> 919eece9fb96ab331225902211ad68987d8858bf
